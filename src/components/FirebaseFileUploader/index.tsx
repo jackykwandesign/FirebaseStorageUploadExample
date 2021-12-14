@@ -4,10 +4,12 @@ import { v4 as uuidv4 } from 'uuid';
 import FirebaseUploadFileDisplayer from "../FirebaseUploadFileDisplayer";
 
 export interface UploadedFile{
-    fileURL:string;
-    isPicture:boolean;
-    fileName:string;
-    originalFileName:string;
+    fileURL:string
+    isPicture:boolean
+    fileName:string
+    filePath:string
+    contentType:string
+    originalFileName:string
 }
 
 const FirebaseFileUploader = ({
@@ -90,7 +92,7 @@ const FirebaseFileUploader = ({
             if(!disableDownloadURL){
                 fileURL = await getDownloadURL(uploadRes.ref)
             }else{
-                fileURL = await uploadRes.ref.fullPath
+                fileURL = uploadRes.ref.fullPath
             }
             
             //  pdf = application/pdf
@@ -98,6 +100,8 @@ const FirebaseFileUploader = ({
             tempUploadFileList.push({
                 fileName,
                 fileURL,
+                filePath:uploadRes.ref.fullPath,
+                contentType:uploadRes.metadata.contentType ?? "",
                 isPicture: file.type === "application/pdf" ? false : true,
                 originalFileName:file.name,
             })

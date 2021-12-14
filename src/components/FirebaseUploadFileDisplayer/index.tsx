@@ -25,6 +25,8 @@ const FirebaseUploadFileDisplayer = ({
                 let newFile:UploadedFile = {
                     fileURL:file,
                     isPicture:false,
+                    contentType:"",
+                    filePath:"",
                     originalFileName:"unknown",
                     fileName:"unknown"
                 }
